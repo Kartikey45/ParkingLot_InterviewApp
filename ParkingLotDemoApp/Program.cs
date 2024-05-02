@@ -9,7 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IParkingLotManagement, ParkingLotManagement>();
+builder.Services.AddSingleton<IParkingLotManagement, ParkingLotManagement>();
 
 var app = builder.Build();
 

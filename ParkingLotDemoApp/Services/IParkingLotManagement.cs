@@ -4,10 +4,10 @@ namespace ParkingLotDemoApp.Services
 {
     public interface IParkingLotManagement
     {
-        void InitializeParkingLot(int totalSlots, string vehicalType);
-        (bool, int) CheckSlot();
-        bool Park(string vehicalType , string vehicalName);
-        bool UnPark(string vehicalType , string vehicalName);
+        VehicalDetail[] Details();
+        (VehicalDetail[], int) InitializeParkingLot(int totalSlots);
+        (bool, int) Park(VehicalDetail vehicle);
+        bool UnPark(int ticketNumber);
 
     }
 }

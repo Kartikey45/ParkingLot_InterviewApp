@@ -14,13 +14,13 @@
         public string VehicalName { get; set; }
         public string VehicalNumber { get; set; }
         public string VehicalType { get; set; }
-        public double TicketNumber { get; set; }
+        public int TicketNumber { get; set; }
     }
 
-    public class ParkingModel
+    /*public class ParkingModel
     {
         public VehicalDetail[] Vehicles { get; set; } = new VehicalDetail[0];
-    }
+    }*/
 
    
 

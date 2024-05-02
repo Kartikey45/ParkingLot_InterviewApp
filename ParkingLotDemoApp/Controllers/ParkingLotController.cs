@@ -14,18 +14,54 @@ namespace ParkingLotDemoApp.Controllers
             _parkingLotManagement = parkingLotManagement;
         }
 
+        [Route("ParkingDetails")]
         [HttpGet]
         public IActionResult ParkingDetails() {
-            var _parking = Parking.Vehicles;
-            return Ok(_parking);
+            var details = _parkingLotManagement.Details();
+            if(details == null)
+            {
+                return NotFound("Parking is empty !");
+            }
+            return Ok(details);
         }
 
-       /* [HttpPost]
-        public IActionResult InitializeParking([FromBody] CommonModel commonModel, [])
+        [Route("InitializeParking")]
+        [HttpPost]
+        public IActionResult InitializeParking([FromBody] int size)
         {
-            return Ok();
-        }*/
+            (var _data, int _size) = _parkingLotManagement.InitializeParkingLot(size);
+            return Ok($"Total {_size} slots created in the Parking");
+        }
 
+        [Route("Park")]
+        [HttpPost]
+        public IActionResult Park([FromBody] VehicalDetail Vehical)
+        {
+            (bool isParked, int ticketNumber) = _parkingLotManagement.Park(Vehical);
+            if(isParked)
+            {
+                return Ok("Vehical Parked in the parking");
+            }
+            else
+            {
+                return Ok("Vehicle was unable to Park");
+            }
+        }
+
+        [Route("UnPark")]
+        [HttpPost]
+        public IActionResult UnPark([FromBody] int TicketNumber)
+        {
+            bool isUnParked = _parkingLotManagement.UnPark(TicketNumber);
+            if (isUnParked)
+            {
+                return Ok("Vehical Unparked in the parking");
+            }
+            else
+            {
+                return Ok("Vehicle was unable to Unparked");
+            }
+        }
 
 
     }
